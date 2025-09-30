@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Añadido: Font Awesome para los íconos de redes sociales -->
+    <!-- Font Awesome para los íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Añadido: Swiper.js para el carrusel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
 
@@ -40,6 +42,11 @@
     </header>
 
     <section class="hero">
+        <!-- Video de fondo -->
+        <video autoplay muted loop playsinline class="hero-video">
+            <!-- Asume que tienes un video llamado 'hero-video.mp4' en una carpeta 'videos' -->
+            <source src="videos/hero-video.mp4" type="video/mp4">
+        </video>
         <div class="hero-content">
             <h1>Bienvenido a la Fan Page de Black Mirror</h1>
             <p>Explora el oscuro y retorcido universo de la serie que te hará cuestionar la tecnología y el futuro.</p>
@@ -61,40 +68,53 @@
 
         <section class="featured-episodes">
             <h2>Episodios Destacados</h2>
-            <div class="episodes-grid">
-                <!-- Tarjeta de Episodio 1 -->
-                <div class="episode-card">
-                    <div class="card-image">
-                        <img src="img/caidaenpicada.jpg" alt="Episodio Caída en picado">
-                        <div class="card-overlay"><span class="episode-season">T3:E1</span></div>
+            <!-- Contenedor de Swiper -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="episode-card">
+                            <div class="card-image">
+                                <img src="img/caidaenpicada.jpg" alt="Episodio Caída en picado">
+                                <div class="card-overlay"><span class="episode-season">T3:E1</span></div>
+                            </div>
+                            <div class="card-content">
+                                <h3>Caída en picado</h3>
+                                <p>En un mundo donde cada interacción es calificada, una mujer desesperada por aumentar su puntuación social se encuentra en una caída libre.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <h3>Caída en picado</h3>
-                        <p>En un mundo donde cada interacción es calificada, una mujer desesperada por aumentar su puntuación social se encuentra en una caída libre.</p>
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="episode-card">
+                            <div class="card-image">
+                                <img src="img/sanjupitero.jpeg" alt="Episodio San Junipero">
+                                <div class="card-overlay"><span class="episode-season">T3:E4</span></div>
+                            </div>
+                            <div class="card-content">
+                                <h3>San Junipero</h3>
+                                <p>En una ciudad costera en 1987, dos jóvenes forjan un poderoso vínculo que parece desafiar las leyes del tiempo y el espacio.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="episode-card">
+                            <div class="card-image">
+                                <img src="img/callateybaile.jpeg" alt="Episodio Cállate y baila">
+                                <div class="card-overlay"><span class="episode-season">T3:E3</span></div>
+                            </div>
+                            <div class="card-content">
+                                <h3>Cállate y baila</h3>
+                                <p>Esta pesadillesca historia sigue a un chico joven chantajeado por un grupo de hackers, y el giro final te dejará con mal cuerpo.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- Tarjeta de Episodio 2 -->
-                <div class="episode-card">
-                    <div class="card-image">
-                        <img src="img/sanjupitero.jpeg" alt="Episodio San Junipero">
-                        <div class="card-overlay"><span class="episode-season">T3:E4</span></div>
-                    </div>
-                    <div class="card-content">
-                        <h3>San Junipero</h3>
-                        <p>En una ciudad costera en 1987, dos jóvenes forjan un poderoso vínculo que parece desafiar las leyes del tiempo y el espacio.</p>
-                    </div>
-                </div>
-                <!-- Tarjeta de Episodio 3 -->
-                <div class="episode-card">
-                    <div class="card-image">
-                        <img src="img/callateybaile.jpeg" alt="Episodio Cállate y baila">
-                        <div class="card-overlay"><span class="episode-season">T3:E3</span></div>
-                    </div>
-                    <div class="card-content">
-                        <h3>Cállate y baila</h3>
-                        <p>Esta pesadillesca historia sigue a un chico joven (Alex Lawther) chantajeado por un grupo de hackers, y el giro final te dejará con mal cuerpo durante un mes.</p>
-                    </div>
-                </div>
+                <!-- Añadimos paginación y botones de navegación -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </section>
     </main>
@@ -115,6 +135,9 @@
         </div>
     </footer>
 
+    <!-- Añadido: Script de Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/script.js"></script>
+
 </body>
 </html>

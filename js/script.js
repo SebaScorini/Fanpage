@@ -106,4 +106,39 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- Lógica para el carrusel de Swiper.js ---
+    // Verificamos que exista el contenedor de Swiper antes de inicializarlo
+    if (document.querySelector('.swiper-container')) {
+        const swiper = new Swiper('.swiper-container', {
+            // Opciones de Swiper
+            loop: true, // Para que el carrusel sea infinito
+            slidesPerView: 1, // Mostrar 1 slide en móvil
+            spaceBetween: 20, // Espacio entre slides
+            
+            // Paginación (los puntitos de abajo)
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+
+            // Botones de navegación (las flechas)
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // Breakpoints para responsive (mostrar más slides en pantallas grandes)
+            breakpoints: {
+                // Cuando el ancho de la ventana es >= 768px
+                768: {
+                    slidesPerView: 2,
+                },
+                // Cuando el ancho de la ventana es >= 1024px
+                1024: {
+                    slidesPerView: 3,
+                }
+            }
+        });
+    }
 });
