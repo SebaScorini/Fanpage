@@ -1,0 +1,820 @@
+/* --- Variables y Estilos Globales --- */
+:root {
+    --primary-color: #ffffff;
+    --background-color: #121212;
+    --accent-color: #00bfff; 
+    --text-color: #e0e0e0;
+    --header-bg: #1a1a1a;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto Mono', monospace;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Encabezado y Navegación --- */
+.site-header {
+    background-color: var(--header-bg);
+    padding: 1rem 0;
+    border-bottom: 1px solid #333;
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+    animation: glitch 1s linear infinite;
+}
+
+/* Animación Glitch para el logo */
+@keyframes glitch {
+  2%,64%{ transform: translate(2px,0) skew(0deg); }
+  4%,60%{ transform: translate(-2px,0) skew(0deg); }
+  62%{ transform: translate(0,0) skew(5deg); }
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* --- Estilos del Submenú (Dropdown) --- */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle .fa-caret-down {
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--header-bg);
+    border: 1px solid #333;
+    border-radius: 0 0 4px 4px;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    min-width: 160px;
+    z-index: 1001;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li a {
+    padding: 0.5rem 1rem;
+    display: block;
+}
+
+/* --- Menú Hamburguesa (oculto en desktop) --- */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1000;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* --- Sección de Presentación (Hero) --- */
+.hero {
+    position: relative;
+    height: 80vh; /* Ocupa el 80% de la altura de la ventana */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--primary-color);
+    overflow: hidden; /* Esconde las partes de la imagen que se salen por la animación */
+}
+
+/* Usamos un pseudo-elemento para el fondo para poder animarlo y aplicar filtros sin afectar el contenido */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/black-mirror-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.5); /* Oscurece la imagen para que el texto resalte */
+    z-index: -1;
+    animation: zoomIn 20s infinite alternate; /* Animación de zoom sutil */
+}
+
+@keyframes zoomIn {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+.hero-content {
+    animation: fadeIn 2s ease-in-out; /* Animación de aparición para el texto */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Contenido Principal y Pie de Página --- */
+main {
+    padding: 4rem 0; /* Aumentamos el padding para separar del hero */
+    flex-grow: 1; /* Hace que el contenido principal crezca para empujar el footer hacia abajo */
+}
+
+/* --- Sección "Sobre la Serie" --- */
+.about-section {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.about-image {
+    flex: 1;
+    max-width: 45%;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Mantenemos el radio para consistencia visual */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-image img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 191, 255, 0.2); /* Sombra con el color de acento */
+}
+
+.about-text { flex: 1; }
+
+/* --- Separador de Secciones --- */
+.section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    border: 0;
+    margin: 4rem auto;
+    opacity: 0.5;
+    width: 80%;
+}
+
+/* --- Sección de Episodios Destacados --- */
+.episodes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.episode-card {
+    background-color: var(--header-bg);
+    border: 1px solid #333;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Necesario para posicionar el pseudo-elemento */
+}
+
+/* Creamos un pseudo-elemento para manejar la sombra y evitar el "glitch" de la animación */
+.episode-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0, 191, 255, 0.15);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1; /* Lo colocamos detrás del contenido de la tarjeta */
+}
+
+.episode-card:hover {
+    transform: translateY(-10px); /* Mantenemos el movimiento */
+}
+
+.episode-card:hover::after {
+    opacity: 1; /* Mostramos la sombra en el hover */
+}
+
+.card-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden; /* Movemos el overflow aquí para recortar solo la imagen */
+    border-radius: 8px 8px 0 0; /* Aseguramos que las esquinas superiores sean redondeadas */
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.episode-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* El gradiente cubre toda la imagen */
+    background: linear-gradient(to top, rgba(18, 18, 18, 0.8), transparent);
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.episode-season {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 4px;
+}
+
+.card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+}
+
+.card-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.card-content p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+/* Estilos para los títulos dentro del contenido principal */
+main h1, main h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+main h1 {
+    font-size: 2.5rem;
+}
+
+main h2 {
+    font-size: 2rem;
+}
+
+.site-footer {
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid #333;
+    font-size: 0.9rem;
+}
+
+/* --- Estilos del Footer tipo Fila --- */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copyright {
+    text-align: center;
+}
+
+.copyright p {
+    margin: 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem; /* Espacio entre íconos */
+}
+
+.social-links a {
+    color: var(--text-color);
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+/* --- Estilos para la página de Galería --- */
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-header h1 {
+    border-bottom: none; /* Quitamos el borde del h1 general para este */
+    margin-bottom: 0.5rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid #333;
+    aspect-ratio: 16 / 10; /* Mantiene una proporción consistente */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 18, 18, 0.7); /* Aumentamos un poco la opacidad para mejor contraste */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/* --- Estilos para el Modal (Lightbox) --- */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; /* Re-añadimos el scroll por si la imagen es muy grande */
+    background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+    /* Nueva técnica de centrado absoluto */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* Mantenemos los límites de tamaño */
+    max-width: 90%;
+    max-height: 90vh;
+    width: auto; /* Para mantener la proporción */
+    height: auto; /* Para mantener la proporción */
+    display: block;
+    animation: zoomInModal 0.4s;
+}
+
+@keyframes zoomInModal {
+    from {
+        transform: translate(-50%, -50%) scale(0.8); /* Combinamos centrado y escala */
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1); /* Mantenemos el centrado al final */
+        opacity: 1;
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #bbb;
+    text-decoration: none;
+}
+
+/* Estilos para los botones de navegación del slider */
+.prev-button,
+.next-button {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px; /* Volvemos a un ajuste con margin, -22px suele funcionar mejor que -50px */
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    transition: 0.3s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.next-button {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev-button:hover,
+.next-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+/* Para evitar el scroll del body cuando el modal está abierto */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* --- Estilos para la página de Contacto --- */
+.contact-form {
+    border: 1px solid #333;
+    padding: 2.5rem;
+    border-radius: 8px;
+    background-color: var(--header-bg);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color); /* Usamos la variable global de color de texto */
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.6rem;
+    background-color: var(--background-color);
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: var(--primary-color); /* Usamos la variable global de color primario */
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--background-color); /* Usamos la variable de color de fondo para el texto del botón */
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #00a2d9;
+    transform: translateY(-2px);
+}
+
+/* --- Estilos para el layout de la página de contacto --- */
+.contact-layout {
+    display: flex;
+    gap: 2.5rem;
+    align-items: stretch; /* Hacemos que ambos elementos tengan la misma altura */
+}
+
+.contact-form {
+    flex: 1.2;
+}
+
+.contact-form:hover, .map-container:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+}
+
+.map-container {
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #333;
+    line-height: 0; /* Para eliminar espacio extra debajo del iframe */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex; /* Para que el iframe ocupe todo el espacio */
+    flex-direction: column;
+    background-color: var(--header-bg);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* --- Media Queries Consolidadas --- */
+/* Estilos para tablets y dispositivos medianos (hasta 992px) */
+@media (max-width: 992px) {
+    .contact-layout {
+        flex-direction: column;
+    }
+
+    .map-container iframe {
+        width: 100%;
+        height: 350px;
+    }
+}
+
+/* Estilos para móviles (hasta 768px) */
+@media (max-width: 768px) {
+    /* --- Navegación --- */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Empieza oculto fuera de la pantalla */
+        width: 70%;
+        height: 100vh;
+        background-color: var(--header-bg);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.4s ease-in-out;
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        right: 0; /* Se muestra al agregar la clase 'active' */
+    }
+
+    .hamburger {
+        display: block; /* Muestra el botón de hamburguesa */
+    }
+
+    /* Animación de la hamburguesa a una 'X' */
+    .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* --- Hero --- */
+    .hero { height: 60vh; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; }
+
+    /* --- Sección "Sobre la Serie" --- */
+    .about-section {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .about-image { max-width: 100%; }
+
+    /* --- Footer --- */
+    .footer-content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    /* --- Submenú en móvil --- */
+    .dropdown {
+        width: 100%;
+        text-align: center;
+    }
+
+    .dropdown-menu {
+        display: none; /* Oculto por defecto */
+        position: static; /* Quitamos el posicionamiento absoluto */
+        background-color: #2a2a2a; /* Un poco más claro para diferenciar */
+        border: none;
+        border-radius: 0;
+        width: 100%;
+        padding: 0;
+        margin-top: 0.5rem;
+        max-height: 0; /* Para la animación */
+        overflow: hidden; /* Para la animación */
+        transition: max-height 0.4s ease-out;
+    }
+
+    .dropdown-menu.active {
+        max-height: 500px; /* Un valor alto para permitir que se expanda */
+    }
+}
+
+/* --- Estilos para la página de Temporadas --- */
+.season-section {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.season-image {
+    flex: 1;
+    max-width: 40%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.season-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.season-image:hover img {
+    transform: scale(1.08);
+}
+
+.season-content {
+    flex: 1.5;
+}
+
+/* En móvil, la sección de temporada se apila */
+@media (max-width: 768px) {
+    .season-section {
+        flex-direction: column;
+    }
+    .season-image {
+        max-width: 100%;
+    }
+}
+
+/* --- Estilos para la página de detalle de temporada (temp1.html, etc.) --- */
+.page-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-title h1 {
+    border-bottom: none;
+    margin-bottom: 0.5rem;
+}
+
+.episodes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.episode-item {
+    display: flex;
+    gap: 1.5rem;
+    background-color: var(--header-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+    align-items: center;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+    overflow: hidden; /* Clave para una transición suave de altura */
+}
+
+.episode-item:not(.expanded):hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.15);
+}
+
+.episode-image {
+    width: 220px;
+    height: 124px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: all 0.4s ease-in-out;
+}
+
+.episode-content h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.episode-content p {
+    max-height: 100px; /* Altura inicial para el texto */
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, font-size 0.4s ease-in-out;
+}
+
+/* --- Estilos para el episodio expandido --- */
+.episode-item.expanded {
+    flex-direction: column;
+    align-items: flex-start;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+}
+
+.episode-item.expanded .episode-image {
+    width: 100%;
+    height: auto; /* Cambiamos a 'auto' para mantener la proporción y evitar recortes */
+}
+
+.episode-item.expanded .episode-content p {
+    max-height: 500px; /* Permitimos que el texto se expanda */
+    font-size: 1.05rem; /* Agrandamos un poco el texto */
+}
+
+/* Responsive para la lista de episodios */
+@media (max-width: 768px) {
+    .episode-item {
+        flex-direction: column;
+    }
+}
